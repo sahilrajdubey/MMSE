@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help - AI Multimedia Search</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4a6cf7;
+      --secondary-color: #6a7dfb;
+      --accent-color: #f0f4ff;
+      --text-color: #333;
+      --light-text: #666;
+      --white: #fff;
+      --bg-light: #f8f9ff;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      --border-radius: 10px;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    header {
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 0;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
+      gap: 10px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-link {
+      color: var(--light-text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 8px 16px;
+      border-radius: 6px;
+    }
+    
+    .nav-link:hover {
+      color: var(--primary-color);
+      background-color: var(--accent-color);
+    }
+    
+    .nav-link.active {
+      color: var(--primary-color);
+      font-weight: 600;
+      background-color: var(--accent-color);
+    }
+    
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    main {
+      padding: 2rem 0;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--primary-color);
+      text-align: center;
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-color);
+    }
+    
+    .help-card {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: var(--transition);
+    }
+    
+    .help-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .help-section {
+      margin-bottom: 3rem;
+    }
+    
+    .accordion {
+      margin-bottom: 1rem;
+    }
+    
+    .accordion-header {
+      background-color: var(--accent-color);
+      padding: 1rem 1.5rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition);
+    }
+    
+    .accordion-header:hover {
+      background-color: #e4e9ff;
+    }
+    
+    .accordion-content {
+      padding: 1rem 1.5rem;
+      background: var(--white);
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+      display: none;
+    }
+    
+    .accordion.active .accordion-content {
+      display: block;
+    }
+    
+    .accordion.active .accordion-header {
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary-color);
+      color: var(--white);
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      gap: 0.5rem;
+    }
+    
+    .btn:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--accent-color);
+    }
+    
+    .search-box {
+      display: flex;
+      margin-bottom: 2rem;
+    }
+    
+    .search-input {
+      flex: 1;
+      padding: 1rem;
+      border: 2px solid #eee;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      font-size: 1rem;
+    }
+    
+    .search-btn {
+      background-color: var(--primary-color);
+      color: var(--white);
+      border: none;
+      padding: 0 1.5rem;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      cursor: pointer;
+    }
+    
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: var(--border-radius);
+      margin: 2rem 0;
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    .help-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .contact-form {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+    }
+    
+    textarea.form-control {
+      min-height: 150px;
+    }
+    
+    footer {
+      background-color: var(--primary-color);
+      color: var(--white);
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+    
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    
+    .footer-section {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .footer-title {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-link {
+      margin-bottom: 0.5rem;
+    }
+    
+    .footer-link a {
+      color: var(--white);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .footer-link a:hover {
+      text-decoration: underline;
+      opacity: 0.9;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .menu-btn {
+        display: block;
+      }
+      
+      .help-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with Navigation -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="../index.html" class="logo">
+          <i class="fas fa-search"></i>
+          AI Media Search
+        </a>
+        <div class="nav-links">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="browse.html" class="nav-link">Browse</a>
+          <a href="trending.html" class="nav-link">Trending</a>
+          <a href="help.html" class="nav-link active">Help</a>
+        </div>
+        <button class="menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1>Help Center</h1>
+      
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="Search for help topics...">
+        <button class="search-btn"><i class="fas fa-search"></i></button>
+      </div>
+
+      <div class="help-section">
+        <h2>Getting Started</h2>
+        <div class="help-grid">
+          <div class="help-card">
+            <i class="fas fa-rocket fa-2x" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>Quick Start Guide</h3>
+            <p>Learn the basics of AI Multimedia Search in just a few minutes.</p>
+            <a href="#" class="btn btn-outline" style="margin-top: 1rem;">Read Guide</a>
+          </div>
+          <div class="help-card">
+            <i class="fas fa-upload fa-2x" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>Uploading Media</h3>
+            <p>How to upload and properly tag your media files for better search results.</p>
+            <a href="#" class="btn btn-outline" style="margin-top: 1rem;">Learn More</a>
+          </div>
+          <div class="help-card">
+            <i class="fas fa-search fa-2x" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>Advanced Search</h3>
+            <p>Master the advanced search features to find exactly what you need.</p>
+            <a href="#" class="btn btn-outline" style="margin-top: 1rem;">View Tutorial</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="help-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="accordion">
+          <div class="accordion-header">
+            <span>How does AI improve search results?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="accordion-content">
+            <p>Our AI technology analyzes the content, context, and metadata of media files to understand what they contain. This allows for more accurate search results based on natural language queries, visual similarity, and semantic understanding rather than just keywords.</p>
+          </div>
+        </div>
+        <div class="accordion">
+          <div class="accordion-header">
+            <span>What file types are supported?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="accordion-content">
+            <p>We support a wide range of file formats:</p>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+              <li>Images: JPG, PNG, GIF, WEBP, SVG, HEIC</li>
+              <li>Video: MP4, MOV, AVI, WEBM, MKV</li>
+              <li>Audio: MP3, WAV, OGG, M4A, FLAC</li>
+              <li>Documents: PDF, DOCX, TXT, MD</li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion">
+          <div class="accordion-header">
+            <span>How can I improve my search results?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="accordion-content">
+            <p>To get better search results:</p>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+              <li>Use specific, descriptive queries</li>
+              <li>Try using synonyms if you don't find what you need</li>
+              <li>Utilize filters to narrow down results</li>
+              <li>Upload a reference image for visual similarity search</li>
+              <li>Add detailed descriptions when uploading your own media</li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion">
+          <div class="accordion-header">
+            <span>Is there a limit to how much I can upload?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="accordion-content">
+            <p>Free accounts have a 5GB storage limit. Premium accounts get 100GB of storage, and Business accounts have 1TB. You can check your current usage in your account settings.</p>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <div class="help-section">
+        <h2>Contact Support</h2>
+        <div class="contact-form">
+          <div class="form-group">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" placeholder="Your email address">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <input type="text" class="form-control" placeholder="What's your question about?">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" placeholder="Describe your issue in detail..."></textarea>
+          </div>
+          <button class="btn">
+            <i class="fas fa-paper-plane"></i> Submit Request
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4 class="footer-title">AI Media Search</h4>
+          <p>The advanced multimedia search engine powered by artificial intelligence.</p>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="../index.html">Home</a></li>
+            <li class="footer-link"><a href="browse.html">Browse</a></li>
+            <li class="footer-link"><a href="trending.html">Trending</a></li>
+            <li class="footer-link"><a href="help.html">Help</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-title">Legal</h4>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#">Privacy Policy</a></li>
+            <li class="footer-link"><a href="#">Terms of Service</a></li>
+            <li class="footer-link"><a href="#">Copyright</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-title">Connect</h4>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+            <li class="footer-link"><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+            <li class="footer-link"><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li class="footer-link"><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 AI Media Search. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle menu on mobile
+    document.querySelector('.menu-btn').addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+    
+    // Accordion functionality
+    const accordions = document.querySelectorAll('.accordion');
+    accordions.forEach(accordion => {
+      accordion.querySelector('.accordion-header').addEventListener('click', () => {
+        accordion.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>
